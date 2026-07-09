@@ -1,92 +1,197 @@
-# FastAPI Online Shopping Order Management
+# FastAPI Online Shopping Order Management API
 
-A simple FastAPI-based backend for managing orders in an online shopping system. This project provides RESTful API endpoints for creating, reading, updating, and deleting (CRUD) orders, suitable for e-commerce platforms or as a learning resource for FastAPI.
+A FastAPI-based RESTful backend for managing customer orders in an online shopping system. The application provides CRUD operations for orders and includes interactive API documentation using Swagger UI.
+
+## 🚀 Live Demo
+
+- **Live API:** https://fast-api-online-shopping-management-api.onrender.com/
+- **Swagger Documentation:** https://fast-api-online-shopping-management-api.onrender.com/docs
+- **ReDoc Documentation:** https://fast-api-online-shopping-management-api.onrender.com/redoc
 
 ## Features
-- Create, list, update, and delete orders
-- In-memory data storage (easy to extend to a real database)
-- Automatic OpenAPI docs via Swagger UI
-- Type-safe models using Pydantic
+
+- Create new customer orders
+- Retrieve all orders
+- Retrieve an order by ID
+- Update existing orders
+- Delete orders
+- Automatic interactive API documentation (Swagger UI)
+- Type-safe request and response validation using Pydantic
+- Built with FastAPI
 
 ## Tech Stack
+
 - Python 3.7+
 - FastAPI
-- Uvicorn (ASGI server)
+- Uvicorn
 - Pydantic
 
-## Getting Started
+## Project Structure
 
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Glen-Mathias/fast-api-online-shopping-management.git
-   cd fast-api-online-shopping-management
-   ```
-2. Install dependencies:
-   ```bash
-   pip install fastapi uvicorn
-   ```
+```
+fast-api-online-shopping-management/
+│
+├── main.py
+├── models.py
+├── requirements.txt
+└── README.md
+```
 
-### Running the Application
-Start the development server with:
+## Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/Glen-Mathias/fast-api-online-shopping-management.git
+cd fast-api-online-shopping-management
+```
+
+Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+## Running the Application
+
+Start the development server
+
 ```bash
 uvicorn main:app --reload
 ```
 
-Visit [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) for the interactive API documentation (Swagger UI).
+The application will be available at:
 
-## API Endpoints
+- Local API: http://127.0.0.1:8000/
+- Swagger UI: http://127.0.0.1:8000/docs
+- ReDoc: http://127.0.0.1:8000/redoc
 
-### Health Check
-- `GET /`
-  - **Response:** `{ "message": "Order Management API is running" }`
+---
 
-### Orders
-- `POST /orders`
-  - **Description:** Create a new order
-  - **Request Body:**
-    ```json
+# Live Deployment
+
+The project is deployed on Render.
+
+### Base URL
+
+```
+https://fast-api-online-shopping-management-api.onrender.com
+```
+
+### Interactive Swagger Documentation
+
+```
+https://fast-api-online-shopping-management-api.onrender.com/docs
+```
+
+Recruiters and users can test all endpoints directly from the Swagger interface without installing the project locally.
+
+---
+
+# API Endpoints
+
+## Health Check
+
+### GET /
+
+Returns the application status.
+
+Example Response
+
+```json
+{
+  "message": "Order Management API is running"
+}
+```
+
+---
+
+## Orders
+
+### POST /orders
+
+Create a new order.
+
+Example Request
+
+```json
+{
+  "customer_name": "John Doe",
+  "items": [
     {
-      "customer_name": "John Doe",
-      "items": [
-        { "product_id": 1, "quantity": 2 },
-        { "product_id": 2, "quantity": 1 }
-      ]
+      "product_id": 1,
+      "quantity": 2
+    },
+    {
+      "product_id": 2,
+      "quantity": 1
     }
-    ```
-  - **Response:** Order object with `id`
+  ]
+}
+```
 
-- `GET /orders`
-  - **Description:** List all orders
-  - **Response:** Array of order objects
+---
 
-- `GET /orders/{order_id}`
-  - **Description:** Get a specific order by ID
-  - **Response:** Order object
+### GET /orders
 
-- `PUT /orders/{order_id}`
-  - **Description:** Update an existing order
-  - **Request Body:** Same as POST /orders
-  - **Response:** Updated order object
+Returns all orders.
 
-- `DELETE /orders/{order_id}`
-  - **Description:** Delete an order by ID
-  - **Response:** `{ "message": "Order {order_id} deleted successfully" }`
+---
+
+### GET /orders/{order_id}
+
+Returns a specific order by its ID.
+
+---
+
+### PUT /orders/{order_id}
+
+Updates an existing order.
+
+---
+
+### DELETE /orders/{order_id}
+
+Deletes an order.
+
+Example Response
+
+```json
+{
+  "message": "Order 1 deleted successfully"
+}
+```
+
+---
 
 ## Example Order Object
+
 ```json
 {
   "id": 1,
   "customer_name": "John Doe",
   "items": [
-    { "product_id": 1, "quantity": 2 },
-    { "product_id": 2, "quantity": 1 }
+    {
+      "product_id": 1,
+      "quantity": 2
+    },
+    {
+      "product_id": 2,
+      "quantity": 1
+    }
   ]
 }
 ```
 
-## Contributing
-Contributions are welcome! Please open issues or submit pull requests for improvements.
+## Future Improvements
+
+- MongoDB Atlas integration
+- Authentication & Authorization (JWT)
+- Order status tracking
+- Product inventory management
+- Docker support
+- CI/CD pipeline using GitHub Actions
 
 ## License
+
 This project is licensed under the MIT License.
